@@ -1,8 +1,8 @@
 <div align=center><h1>화면 구성</h1></div>
 
-- team_intro_1 > yunggun
+- team_intro_1 > team_intro_1_yunggune
 <div align=center>
-    <img src="./Images/team_intro_1_yunggun.png">
+    <img src="./Images/team_intro_1_yunggune.png">
 </div>
 - team_intro_1 > yunha
 <div align=center>
