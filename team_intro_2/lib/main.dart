@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: Colors.transparent,
           foregroundColor: Colors.pink,
           titleTextStyle: TextStyle(
-            fontFamily: 'GumiRomance',  // AppBar 제목에 GumiRomance 폰트 적용
+            fontFamily: 'GumiRomance',  // vAppBar 제목에 GumiRomance 폰트 적용
             fontSize: 20,  // 폰트 크기 설정 (필요에 따라 조정)
             fontWeight: FontWeight.bold,  // 필요에 따라 조정
             color: Colors.pink,  // foregroundColor와 일치
