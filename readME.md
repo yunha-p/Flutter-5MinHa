@@ -2,7 +2,7 @@
 
 - team_intro_1 > yunggun
 <div align=center>
-    <img src="./Images/영균_TeamInfo_화면.png">
+    <img src="./Images/team_intro_1_yunggun.png">
 </div>
 
 - team_intro_1 > yunha
@@ -13,4 +13,9 @@
 - team_intro_1 > kunho
 <div align=center>
     <img src="./Images/team_intro_1_kunho.png">
+</div>
+
+- team_intro_1 > doyeon
+<div align=center>
+    <img src="./Images/team_intro_1_doyeon.png">
 </div>
