@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:team_intro/main.dart';
+import 'package:team_intro/project.dart';
 import 'package:team_intro/team_intro.dart';
+
+import 'contact.dart';
 
 class profileDetailPage extends StatelessWidget {
   final String name;
@@ -87,13 +90,29 @@ class profileDetailPage extends StatelessWidget {
           if (index == 0) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => MyHomePage(title : "오늘도 민첩한 하루 되세요.")), // 홈 페이지로 이동
+              MaterialPageRoute(builder: (context) =>
+                  MyHomePage(title: "오늘도 민첩한 하루 되세요.")), // 홈 페이지로 이동
             );
           }
           else if (index == 1) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => TeamIntroductionApp(title : "오늘도 민첩한 하루 되세요.")), // 홈 페이지로 이동
+              MaterialPageRoute(builder: (context) =>
+                  TeamIntroductionApp(title: "오늘도 민첩한 하루 되세요.")), // 홈 페이지로 이동
+            );
+          }
+          else if (index == 2) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) =>
+                  Project(title: "오늘도 민첩한 하루 되세요.")), // 홈 페이지로 이동
+            );
+          }
+          else if (index == 3) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) =>
+                  Contact(title: "오늘도 민첩한 하루 되세요.")), // 홈 페이지로 이동
             );
           }
         },

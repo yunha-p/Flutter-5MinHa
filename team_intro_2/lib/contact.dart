@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:team_intro/main.dart';
+import 'package:team_intro/profile_datail.dart';
 import 'package:team_intro/project.dart';
 import 'package:team_intro/team_intro.dart';
-
-import 'contact.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,63 +32,40 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const MyHomePage(title: '오늘도 민첩한 하루 되세요'),
+      home: const Contact(title: '오늘도 민첩한 하루 되세요'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class Contact extends StatefulWidget {
+
+  const Contact({super.key, required this.title});
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<Contact> createState() => _ContactState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _ContactState extends State<Contact> {
+  int  _selectedIndex = 3;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),  // 개별 스타일 지정 제거
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: Text("5민하 연락처")
       ),
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              '무적5팀',
-              style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 20), // 간격 추가
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-                foregroundColor: Theme.of(context).colorScheme.onPrimary,
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              ),
-              onPressed: () {
-                Navigator.of(context).push(    // 자식 화면으로 이동하기 위한 전형적인 코드
-                  MaterialPageRoute(builder: (_) => TeamIntroductionApp(title : "오늘도 민첩한 하루 되세요.")),
-                );
-              },
-              child: const Text(
-                '알겠다구',
-                style: TextStyle(fontSize: 20,),
-              ),
-            ),
-          ],
-        ),
-      ),
+      body: Text("전화하지 마삼"),
       bottomNavigationBar: BottomNavigationBar( // 페이지 하단의 네비게이션 바
-        type: BottomNavigationBarType.fixed, // 아이템 정렬을 균일하게 설정
-        selectedItemColor: Colors.pink, // 선택된 아이템의 색상
-        unselectedItemColor: Colors.grey, // 선택되지 않은 아이템의 색상도 핑크로 설정
+        type: BottomNavigationBarType.fixed,
+        // 아이템 정렬을 균일하게 설정
+        selectedItemColor: Colors.pink,
+        // 선택된 아이템의 색상
+        unselectedItemColor: Colors.grey,
+        // 선택되지 않은 아이템의 색상도 핑크로 설정
+        currentIndex: _selectedIndex,
         onTap: (int index) {
           if (index == 0) {
             Navigator.push(
@@ -141,5 +118,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-
