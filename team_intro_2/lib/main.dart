@@ -130,16 +130,15 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.assignment), // 프로젝트를 대체할 아이콘
-            label: '프로젝트',
+            label: '팀규칙',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.contact_mail),
-            label: '연락처',
+            label: '링크',
           ),
         ],
       ),
     );
   }
 }
-
 

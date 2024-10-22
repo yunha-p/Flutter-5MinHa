@@ -3,6 +3,7 @@ import 'package:team_intro/main.dart';
 import 'package:team_intro/profile_datail.dart';
 import 'package:team_intro/project.dart';
 import 'package:team_intro/team_intro.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(const MyApp());
@@ -48,16 +49,73 @@ class Contact extends StatefulWidget {
 }
 
 class _ContactState extends State<Contact> {
-  int  _selectedIndex = 3;
+  int _selectedIndex = 3;
+
+  Future<void> _launchURL(String urlString) async {
+    final Uri url = Uri.parse(urlString);
+    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+      throw Exception('Could not launch $urlString');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Text("5민하 연락처")
+          backgroundColor: Theme
+              .of(context)
+              .colorScheme
+              .inversePrimary,
+          title: Text("유용한 링크")
       ),
-      body: Text("전화하지 마삼"),
+      // body: Container(
+      //   child: Center(
+      //     child: Column( // Center 위젯 안에 Column을 추가
+      //       mainAxisAlignment: MainAxisAlignment.center, // Column 내부의 위젯을 가운데로 정렬
+      //       children: [ // 'children' 속성을 사용하여 리스트를 추가
+      //         Text(
+      //           "Comming Soon",
+      //           style: TextStyle(
+      //             fontSize: 40,
+      //             fontWeight: FontWeight.bold,
+      //             color: Colors.pink,
+      //           ),
+      //         ),
+      //         Text(
+      //           "*연락하지 마삼*",
+      //           style: TextStyle(
+      //             fontSize: 20,
+      //             fontStyle: FontStyle.italic,
+      //             color: Colors.grey,
+      //           ),
+      //         ),
+      //       ],
+      //     ),
+      //   ),
+      // ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            const SizedBox(height: 20),
+            _buildLinkCard(
+              context,
+              icon: Icons.code,
+              title: 'GitHub',
+              subtitle: '팀 프로젝트 저장소',
+              url: 'https://github.com/5MinHaAll',
+            ),
+            const SizedBox(height: 16),
+            _buildLinkCard(
+              context,
+              icon: Icons.note_alt_outlined,
+              title: 'Notion',
+              subtitle: '팀 문서 관리',
+              url: 'https://www.notion.so/fd9bd476c64e4610bd34a0ad7ac09746',
+            ),
+          ],
+        ),
+      ),
       bottomNavigationBar: BottomNavigationBar( // 페이지 하단의 네비게이션 바
         type: BottomNavigationBarType.fixed,
         // 아이템 정렬을 균일하게 설정
@@ -114,6 +172,73 @@ class _ContactState extends State<Contact> {
             label: '연락처',
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildLinkCard(BuildContext context, {
+    required IconData icon,
+    required String title,
+    required String subtitle,
+    required String url,
+  }) {
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: InkWell(
+        onTap: () => _launchURL(url),
+        borderRadius: BorderRadius.circular(16),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            children: [
+              Container(
+                width: 60,
+                height: 60,
+                decoration: BoxDecoration(
+                  color: Colors.pink.shade50,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(
+                  icon,
+                  size: 32,
+                  color: Colors.pink,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Paperlogy',
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      subtitle,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey[600],
+                        fontFamily: 'Paperlogy',
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Icon(
+                Icons.arrow_forward_ios,
+                color: Colors.grey,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

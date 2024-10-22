@@ -5,9 +5,6 @@ import 'package:team_intro/project.dart';
 
 import 'contact.dart';
 
-void main() {
-  runApp(const MyApp());
-}
 
 const seedColor = Color(0xFFFFC0D9);
 
@@ -85,13 +82,13 @@ class _TeamIntroductionState extends State<TeamIntroductionApp> {
                       buildProfileCard(
                         context,
                         '양도연',
-                        '뇽안뇽안',
+                        '요니요니',
                         'assets/images/doyeon.png',
                       ),
                       buildProfileCard(
                         context,
                         '엄자연',
-                        '하이하이',
+                        '여니여니',
                         'assets/images/jayeon.png',
                       ),
                     ],
@@ -166,11 +163,11 @@ class _TeamIntroductionState extends State<TeamIntroductionApp> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.assignment), // 프로젝트를 대체할 아이콘
-              label: '프로젝트',
+              label: '팀규칙',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.contact_mail),
-              label: '연락처',
+              label: '링크',
             ),
           ],
         ),
