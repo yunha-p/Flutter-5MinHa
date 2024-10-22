@@ -56,7 +56,7 @@ class _TeamIntroductionState extends State<TeamIntroductionApp> {
           title: Text(widget.title),
         ),
         body: Container( // 팀 고유의 배경 색상 적용
-          color: Colors.lightBlue[50], // 팀 고유의 배경 색상 설정
+          // color: Colors.lightBlue[50], // 팀 고유의 배경 색상 설정
           child: SafeArea(
             child: Center(
               child: Column( // 필수 Widget: Column을 사용하여 수직 레이아웃 구성

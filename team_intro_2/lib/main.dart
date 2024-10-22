@@ -55,7 +55,6 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        color: Colors.white,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -66,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const SizedBox(height: 20), // 간격 추가
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Theme.of(context).colorScheme.primary,
+                backgroundColor: Theme.of(context).colorScheme.inversePrimary,
                 foregroundColor: Theme.of(context).colorScheme.onPrimary,
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               ),
@@ -77,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: const Text(
                 '알겠다구',
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 20,),
               ),
             ),
           ],
