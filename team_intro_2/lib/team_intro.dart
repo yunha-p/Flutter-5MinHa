@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:team_intro/main.dart';
+import 'package:team_intro/profile_datail.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,13 +17,13 @@ class MyApp extends StatelessWidget {
       title: '5MinHa',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: seedColor),
-        fontFamily: 'assets/Paperlogy',  // 기본 폰트를 Paperlogy로 설정
+        fontFamily: 'Paperlogy',  // 기본 폰트를 Paperlogy로 설정
         useMaterial3: true,
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.transparent,
           foregroundColor: Colors.pink,
           titleTextStyle: TextStyle(
-            fontFamily: 'assets/GumiRomance',  // vAppBar 제목에 GumiRomance 폰트 적용
+            fontFamily: 'GumiRomance',  // vAppBar 제목에 GumiRomance 폰트 적용
             fontSize: 20,  // 폰트 크기 설정 (필요에 따라 조정)
             fontWeight: FontWeight.bold,  // 필요에 따라 조정
             color: Colors.pink,  // foregroundColor와 일치
@@ -40,28 +42,18 @@ class TeamIntroductionApp extends StatefulWidget {
   final String title;
 
   @override
-  State<TeamIntroductionApp> createState() => _MyHomePageState();
+  State<TeamIntroductionApp> createState() => _TeamIntroductionState();
 }
 
-class _MyHomePageState extends State<TeamIntroductionApp> {
+class _TeamIntroductionState extends State<TeamIntroductionApp> {
+  int _selectedIndex = 1;
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold( // 필수 Widget: Scaffold를 사용하여 전체 앱의 구조를 정의
+    return Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Text(widget.title),  // 개별 스타일 지정 제거
-          // title: Text(
-          //   '오늘도 민첩한 하루되세요.',
-          //   style: TextStyle(
-          //     fontSize: 24,
-          //     fontWeight: FontWeight.bold,
-          //     fontFamily: 'HMFMPYUN', // 한글 Font 사용 조건을 충족
-          //   ),
-          // ),
-          // centerTitle: true,
-          // backgroundColor: Colors.white, // 앱바 배경은 깔끔한 흰색으로 설정
-          // foregroundColor: Colors.black, // 텍스트는 검정색으로 설정
+          title: Text(widget.title),
         ),
         body: Container( // 팀 고유의 배경 색상 적용
           color: Colors.lightBlue[50], // 팀 고유의 배경 색상 설정
@@ -75,6 +67,7 @@ class _MyHomePageState extends State<TeamIntroductionApp> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       buildProfileCard(
+                        context,
                         '박윤하',
                         '유나유나',
                         'assets/images/yunha.png',
@@ -87,11 +80,13 @@ class _MyHomePageState extends State<TeamIntroductionApp> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       buildProfileCard(
+                        context,
                         '양도연',
                         '뇽안뇽안',
                         'assets/images/doyeon.png',
                       ),
                       buildProfileCard(
+                        context,
                         '엄자연',
                         '하이하이',
                         'assets/images/jayeon.png',
@@ -104,11 +99,13 @@ class _MyHomePageState extends State<TeamIntroductionApp> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       buildProfileCard(
+                        context,
                         '손영균',
                         '규니규니',
                         'assets/images/yunggun.png',
                       ),
                       buildProfileCard(
+                        context,
                         '김근호',
                         '그노그노',
                         'assets/images/kunho.png',
@@ -121,6 +118,18 @@ class _MyHomePageState extends State<TeamIntroductionApp> {
           ),
         ),
         bottomNavigationBar: BottomNavigationBar( // 페이지 하단의 네비게이션 바
+          type: BottomNavigationBarType.fixed, // 아이템 정렬을 균일하게 설정
+          selectedItemColor: Colors.pink, // 선택된 아이템의 색상
+          unselectedItemColor: Colors.grey, // 선택되지 않은 아이템의 색상도 핑크로 설정
+          currentIndex: _selectedIndex,
+          onTap: (int index) {
+            if (index == 0) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MyHomePage(title : "오늘도 민첩한 하루 되세요.")), // 홈 페이지로 이동
+              );
+            }
+          },
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
@@ -139,69 +148,79 @@ class _MyHomePageState extends State<TeamIntroductionApp> {
               label: '연락처',
             ),
           ],
-          selectedItemColor: Colors.blueAccent,
+        ),
+    );
+  }
+
+  Widget buildProfileCard(BuildContext context, String name, String title, String imagePath) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => profileDetailPage(
+              name: name,
+              title: title,
+              imagePath: imagePath,
+              selfIntro : {"김근호" : "매운건 씻어 먹어야 더 맛있어요!",
+                "박윤하" : "환상의 FE쇼! \n뭔가 보여드리겠습니다!!",
+                "양도연" : "안녕하세요~~ \n베스킨라빈스 '너 T야' 꼭 드셔보세요. \n얼그레이 초코 짱맛!",
+                "손영균" : "매운거 싫어함. 유머러스함.",
+                "엄자연" : "얄리얄리 얄라성 얄라리얄라"},
+            ),
+          ),
+        );
+      },
+      child: Container(
+        width: 160,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(0, 3),
+            ),
+          ],
+        ),
+        padding: EdgeInsets.all(12),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Stack(
+              children: [
+                Hero(
+                  tag: name,
+                  child: CircleAvatar(
+                    radius: 60,
+                    backgroundImage: AssetImage(imagePath),
+                  ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: Icon(
+                    Icons.star,
+                    color: Colors.amber,
+                    size: 24,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 15),
+            Text(name,
+              style: TextStyle(fontSize : 20,
+                  fontWeight: FontWeight.bold),),
+            Text(title,
+              style: TextStyle(fontWeight: FontWeight.bold),),
+          ],
         ),
       ),
     );
   }
-
-  Widget buildProfileCard(String name, String title, String imagePath) {
-    return Container( // 필수 Widget: Container로 각 프로필 카드를 감싸서 스타일링
-      width: 160,  // 카드의 너비를 키움
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12), // 카드의 모서리를 둥글게 처리
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5), // 그림자 효과 추가
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: Offset(0, 3),
-          ),
-        ],
-      ),
-      padding: EdgeInsets.all(12), // 패딩을 늘려 전체 크기를 키움
-      child: Column( // Column을 사용하여 프로필 카드 내부 요소를 수직 배치
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Stack( // 필수 Widget: Stack을 사용하여 이미지와 아이콘을 겹쳐 배치
-            children: [
-              CircleAvatar(
-                radius: 60,  // 이미지 크기를 키움
-                backgroundImage: AssetImage(imagePath), // 필수 Widget: Image 사용
-              ),
-              Positioned( // 필수 Widget: Positioned를 사용해 아이콘의 위치를 조정
-                bottom: 0,
-                right: 0,
-                child: Icon(
-                  Icons.star, // 별 아이콘으로 포인트 효과
-                  color: Colors.amber,
-                  size: 24,  // 아이콘 크기 조정
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 15),
-          Text( // 필수 Widget: Text 사용
-            name,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 22,  // 텍스트 크기 증가
-              fontFamily: 'HMFMPYUN',  // 폰트 패밀리 설정 (한글 Font 사용 조건 충족)
-            ),
-          ),
-          Text(
-            title,
-            style: TextStyle(
-              color: Colors.grey[600],
-              fontSize: 16,  // 타이틀 텍스트 크기 증가
-              fontFamily: 'HMFMPYUN',  // 한글 Font 사용 조건 충족
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-
 }
+
+
+
