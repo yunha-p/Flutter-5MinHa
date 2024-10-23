@@ -1,0 +1,48 @@
+name: team_intro
+description: "오늘도 민첩한 하루되세요"
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.3
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  url_launcher: ^6.2.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.13.1 # 앱 아이콘 변경
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/ # 이미지 폴더 추가
+    - assets/icon/ # 아이콘 폴더 추가
+
+  fonts:
+    - family: GumiRomance
+      fonts:
+        - asset: assets/fonts/Gumi Romance.ttf
+    - family: Paperlogy
+      fonts:
+        - asset: assets/fonts/Paperlogy-4Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Paperlogy-8ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Paperlogy-2ExtraLight.ttf
+          weight: 200
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  image_path: "assets/icon/ic_launcher.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
